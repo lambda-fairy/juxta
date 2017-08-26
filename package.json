@@ -9,7 +9,8 @@
     "mocha": "rimraf coverage && nyc mocha --require ts-node/register --reporter nyan **/*.test.ts",
     "prepublish": "npm run build",
     "test": "npm run mocha && npm run tslint",
-    "tslint": "tslint --project tsconfig.json"
+    "tslint": "tslint --project tsconfig.json",
+    "typedoc": "rimraf typedoc && typedoc --out typedoc --tsconfig tsconfig.json --exclude **/*.test.ts --ignoreCompilerErrors --excludeNotExported --excludePrivate --mode file"
   },
   "nyc": {
     "extension": [
@@ -54,6 +55,7 @@
     "rimraf": "^2.6.1",
     "ts-node": "^3.3.0",
     "tslint": "^5.7.0",
+    "typedoc": "^0.8.0",
     "typescript": "^2.5.1"
   }
 }
