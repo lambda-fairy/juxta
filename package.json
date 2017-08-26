@@ -22,7 +22,8 @@
       "**/*.d.ts",
       "**/*.test.ts",
       "coverage",
-      "dist"
+      "dist",
+      "typedoc"
     ],
     "reporter": [
       "html",
