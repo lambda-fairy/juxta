@@ -7,8 +7,10 @@
   "scripts": {
     "build": "rimraf dist && tsc",
     "mocha": "rimraf coverage && nyc mocha --require ts-node/register --reporter nyan **/*.test.ts",
+    "mocha-ci": "rimraf coverage && nyc mocha --require ts-node/register --reporter spec **/*.test.ts",
     "prepublish": "npm run build",
     "test": "npm run mocha && npm run tslint",
+    "test-ci": "npm run mocha-ci && npm run tslint",
     "tslint": "tslint --project tsconfig.json",
     "typedoc": "rimraf typedoc && typedoc --out typedoc --tsconfig tsconfig.json --exclude **/*.test.ts --ignoreCompilerErrors --excludeNotExported --excludePrivate --mode file"
   },
