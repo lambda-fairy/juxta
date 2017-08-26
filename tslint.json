@@ -1,0 +1,26 @@
+{
+    "extends": [
+        "tslint:latest"
+    ],
+    "rules": {
+        "interface-name": [
+            true,
+            "never-prefix"
+        ],
+        "quotemark": [
+            true,
+            "single",
+            "avoid-escape"
+        ],
+        "space-before-function-paren": [
+            true,
+            {
+                "anonymous": "always",
+                "named": "never",
+                "asyncArrow": "always",
+                "method": "never",
+                "constructor": "never"
+            }
+        ]
+    }
+}

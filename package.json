@@ -1,0 +1,59 @@
+{
+  "name": "juxta",
+  "version": "1.0.0",
+  "description": "Composable comparisons",
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
+  "scripts": {
+    "build": "rimraf dist && tsc",
+    "mocha": "rimraf coverage && nyc mocha --require ts-node/register --reporter nyan **/*.test.ts",
+    "prepublish": "npm run build",
+    "test": "npm run mocha && npm run tslint",
+    "tslint": "tslint --project tsconfig.json"
+  },
+  "nyc": {
+    "extension": [
+      ".ts"
+    ],
+    "exclude": [
+      "**/*.d.ts",
+      "**/*.test.ts",
+      "coverage",
+      "dist"
+    ],
+    "reporter": [
+      "html",
+      "text"
+    ],
+    "all": true
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lfairy/juxta.git"
+  },
+  "keywords": [
+    "compare",
+    "compose",
+    "functional",
+    "array",
+    "object",
+    "sort"
+  ],
+  "author": "Chris Wong <lambda.fairy@gmail.com>",
+  "license": "MIT OR Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/lfairy/juxta/issues"
+  },
+  "homepage": "https://github.com/lfairy/juxta#readme",
+  "devDependencies": {
+    "@types/chai": "^4.0.4",
+    "@types/mocha": "^2.2.42",
+    "chai": "^4.1.1",
+    "mocha": "^3.5.0",
+    "nyc": "^11.1.0",
+    "rimraf": "^2.6.1",
+    "ts-node": "^3.3.0",
+    "tslint": "^5.7.0",
+    "typescript": "^2.5.1"
+  }
+}
