@@ -182,6 +182,16 @@ describe('prefabs', function () {
             expect(f('AAA', 'aaa')).to.equal(0);
             expect(f('aaa', 'BBB')).to.equal(-1);
         });
+
+        it('exposes a collator property', function () {
+            const f = compare.locale('en', { sensitivity: 'base' });
+            expect(f.collator).is.instanceOf(Intl.Collator);
+        });
+
+        it('marks the collator property as read-only', function () {
+            const f = compare.locale('en', { sensitivity: 'base' });
+            expect(() => (f as any).collator = 42).to.throw(TypeError);
+        });
     });
 });
 

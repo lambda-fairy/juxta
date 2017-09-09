@@ -1,7 +1,7 @@
 export interface Compare {
     <T>(func?: BaseComparator<T>): Comparator<T>;
     on<T>(transform: (a: T) => any): Comparator<T>;
-    locale(locales?: string | string[], options?: Intl.CollatorOptions): Comparator<string>;
+    locale(locales?: string | string[], options?: Intl.CollatorOptions): LocaleComparator;
 }
 
 export type BaseComparator<T> = (a: T, b: T) => number;
@@ -14,6 +14,10 @@ export interface Comparator<T> extends BaseComparator<T> {
     prepend<U>(predicate: (a: U | T) => a is U, handler?: BaseComparator<U>): Comparator<U | T>;
     prepend(predicate: (a: T) => boolean, handler?: BaseComparator<T>): Comparator<T>;
     then<U>(handler?: BaseComparator<U>): Comparator<T & U>;
+}
+
+export interface LocaleComparator extends Comparator<string> {
+    readonly collator: Intl.Collator;
 }
 
 function defaultComparator<T>(a: T, b: T): number {
@@ -101,8 +105,14 @@ compare.on = function on<T>(transform: (a: T) => any): Comparator<T> {
     return this<any>().from(transform);
 };
 
-compare.locale = function locale(locales?: string | string[], options?: Intl.CollatorOptions): Comparator<string> {
-    return compare(new Intl.Collator(locales, options).compare);
+compare.locale = function locale(locales?: string | string[], options?: Intl.CollatorOptions): LocaleComparator {
+    const collator = new Intl.Collator(locales, options);
+    const result = this(collator.compare) as LocaleComparator;
+    Object.defineProperty(result, 'collator', {
+        value: collator,
+        writable: false,
+    });
+    return result;
 };
 
 export default compare;
