@@ -1,6 +1,6 @@
 export interface Compare {
     <T>(func?: BaseComparator<T>): Comparator<T>;
-    on<T>(transformOrProperty: ((a: T) => any) | keyof T): Comparator<T>;
+    on<T>(transform: (a: T) => any): Comparator<T>;
     locale(locales?: string | string[], options?: Intl.CollatorOptions): Comparator<string>;
 }
 
@@ -97,11 +97,8 @@ const compare: Compare = (<T> (func: BaseComparator<T> = defaultComparator): Com
     return result;
 }) as Compare;
 
-compare.on = function on<T>(transformOrProperty: ((a: T) => any) | keyof T): Comparator<T> {
-    if (typeof transformOrProperty === 'function') {
-        return this<any>().from(transformOrProperty as (a: T) => any);
-    }
-    return this<T[keyof T]>().from((a) => a[transformOrProperty]);
+compare.on = function on<T>(transform: (a: T) => any): Comparator<T> {
+    return this<any>().from(transform);
 };
 
 compare.locale = function locale(locales?: string | string[], options?: Intl.CollatorOptions): Comparator<string> {

@@ -170,11 +170,6 @@ describe('modifiers', function () {
 
 describe('prefabs', function () {
     describe('#on', function () {
-        it('accepts property names', function () {
-            const f: Comparator<number[]> = compare.on('length');
-            expect(f([1, 1, 1], [99999999])).to.equal(1);
-        });
-
         it('accepts callbacks', function () {
             const f: Comparator<string> = compare.on((s) => s.toLowerCase());
             expect(f('ZZZ', 'aaa')).to.equal(1);
