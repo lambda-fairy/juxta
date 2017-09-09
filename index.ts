@@ -8,7 +8,7 @@ export type BaseComparator<T> = (a: T, b: T) => number;
 
 export interface Comparator<T> extends BaseComparator<T> {
     reverse(): Comparator<T>;
-    map<U>(transform: (a: U) => T): Comparator<U>;
+    from<U>(transform: (a: U) => T): Comparator<U>;
     append<U>(predicate: (a: T | U) => a is U, handler?: BaseComparator<U>): Comparator<T | U>;
     append(predicate: (a: T) => boolean, handler?: BaseComparator<T>): Comparator<T>;
     prepend<U>(predicate: (a: U | T) => a is U, handler?: BaseComparator<U>): Comparator<U | T>;
@@ -30,7 +30,7 @@ function reverse<T>(this: BaseComparator<T>): Comparator<T> {
     return compare((a, b) => this(b, a));
 }
 
-function map<T, U>(this: BaseComparator<T>, transform: (a: U) => T): Comparator<U> {
+function from<T, U>(this: BaseComparator<T>, transform: (a: U) => T): Comparator<U> {
     return compare((a, b) => this(transform(a), transform(b)));
 }
 
@@ -90,7 +90,7 @@ function then<T, U>(
 const compare: Compare = (<T> (func: BaseComparator<T> = defaultComparator): Comparator<T> => {
     const result = func as any;
     result.reverse = reverse;
-    result.map = map;
+    result.from = from;
     result.append = append;
     result.prepend = prepend;
     result.then = then;
@@ -99,9 +99,9 @@ const compare: Compare = (<T> (func: BaseComparator<T> = defaultComparator): Com
 
 compare.on = function on<T>(transformOrProperty: ((a: T) => any) | keyof T): Comparator<T> {
     if (typeof transformOrProperty === 'function') {
-        return this<any>().map(transformOrProperty as (a: T) => any);
+        return this<any>().from(transformOrProperty as (a: T) => any);
     }
-    return this<T[keyof T]>().map((a) => a[transformOrProperty]);
+    return this<T[keyof T]>().from((a) => a[transformOrProperty]);
 };
 
 compare.locale = function locale(locales?: string | string[], options?: Intl.CollatorOptions): Comparator<string> {

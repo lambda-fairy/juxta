@@ -55,9 +55,9 @@ describe('modifiers', function () {
         });
     });
 
-    describe('#map', function () {
+    describe('#from', function () {
         it('works', function () {
-            const f: Comparator<number> = compare().map((x) => x.toString());
+            const f: Comparator<number> = compare().from((x) => x.toString());
             expect(f(16, 9)).to.equal(-1);
         });
     });
@@ -143,8 +143,8 @@ describe('modifiers', function () {
         const yuukoTheElder = { name: 'Yuuko', age: 64 };
         const yuukoTheYounger = { name: 'Yuuko', age: 8 };
 
-        const f = compare<string>().map((x: Person) => x.name)
-            .then(compare<number>().map((x: Person) => x.age).reverse());
+        const f = compare<string>().from((x: Person) => x.name)
+            .then(compare<number>().from((x: Person) => x.age).reverse());
 
         it('returns the first result if non-zero', function () {
             expect(f(anna, khalid)).to.equal(-1);
@@ -161,7 +161,7 @@ describe('modifiers', function () {
         });
 
         it('uses the default comparator if none given', function () {
-            const g = compare<string>().map((s: string) => s[1]).then<string>();
+            const g = compare<string>().from((s: string) => s[1]).then<string>();
             expect(g('za', 'yb')).to.equal(-1);
             expect(g('za', 'ya')).to.equal(1);
         });
