@@ -100,7 +100,7 @@ There are three main ways to create a comparison function:
 
 * Use `compare<T>()` to compare values of type `T` using the built-in `<` and `>` operators. For example, `compare<number>()` compares values of type `number`.
 * Use `compare(existingFunction)` to wrap an existing comparison function in a *juxta* object. This lets you use the helper methods detailed below. For example, `compare((s: string, t: string) => s.localeCompare(t))` compares strings case-insensitively using the current locale.
-* Use `compare.on<T>(...)` to transform the input before comparing it. For example, `compare.on<number>((x: any[]) => x.length)` compares arrays by length.
+* Use `compare.on(...)` to transform the input before comparing it. For example, `compare.on((x: any[]) => x.length)` compares arrays by length.
 
 
 ## Using comparison functions
