@@ -117,7 +117,7 @@ console.log([3, 2, 1].sort(compareNumbers));  // [1, 2, 3]
 
 `compare()` and `compare.on()` use ascending order (smallest first) by default.
 
-To sort by descending order (largest first) instead, use the `.reverse()` method: `compare<number>.reverse()`.
+To sort by descending order (largest first) instead, use the `.reverse()` method: `compare<number>().reverse()`.
 
 Calling `.reverse()` twice gives the same result as calling it zero times.
 
