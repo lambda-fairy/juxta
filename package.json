@@ -1,6 +1,6 @@
 {
   "name": "juxta",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "Composable comparisons",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
@@ -60,6 +60,6 @@
     "ts-node": "^3.3.0",
     "tslint": "^5.7.0",
     "typedoc": "^0.8.0",
-    "typescript": "^2.5.2"
+    "typescript": "^2.5.3"
   }
 }
