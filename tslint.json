@@ -7,6 +7,10 @@
             true,
             "never-prefix"
         ],
+        "no-implicit-dependencies": [
+            true,
+            "dev"
+        ],
         "quotemark": [
             true,
             "single",
