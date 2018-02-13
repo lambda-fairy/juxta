@@ -13,8 +13,8 @@ A library for writing composable comparison functions.
 
 ```typescript
 import compare, { Comparator } from 'juxta';
-import * as _ from 'lodash';
-import * as moment from 'moment';
+import _ from 'lodash';
+import moment from 'moment';
 
 interface SearchResult {
     name: string | null;
@@ -174,7 +174,7 @@ const compareTrinketsLast = compareElvesByBaubles
 In more peaceful times, `.prepend()` and `.append()` can be used for separating `null`, `undefined`, and `NaN` values as well:
 
 ```typescript
-import * as _ from 'lodash';
+import _ from 'lodash';
 
 const compareNumbers = compare<number>().append(isNaN);
 
